@@ -28,6 +28,24 @@ type Query {
   users(skip: Int = 0, take: Int = 10): [User!]!
 }
 
+type Resource implements Base {
+  _id: ObjectId!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  state: State!
+  name: String!
+  url: String!
+}
+
+type Role implements Base {
+  _id: ObjectId!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  state: State!
+  name: String!
+  resource: [Resource!]!
+}
+
 """all state in this system"""
 enum State {
   UNDELETE
@@ -46,6 +64,7 @@ type User implements Base {
   tel: String!
   email: String!
   password: String!
+  roles: [Role!]!
 }
 
 input UserInput {

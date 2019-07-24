@@ -20,7 +20,7 @@ interface Context {
         const ctx: Context = {
           user: {
             name: 'sample user',
-            roles: ['Admin'],
+            roles: [{ name: 'Admin' }],
           },
         }
         return ctx

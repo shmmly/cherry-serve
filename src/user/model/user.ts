@@ -30,7 +30,7 @@ export class User extends Base {
   password: string
 
   @prop()
-  @Field()
+  @Field(_ => Role)
   roles: Role[]
 }
 

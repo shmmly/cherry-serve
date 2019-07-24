@@ -3,6 +3,8 @@ import { User } from './model/user';
 import { Resolver, Args, Query, Mutation } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { PaginationArgs } from '../common/pagination';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Resolver(of => User)
 export class UserResolver {
@@ -13,6 +15,7 @@ export class UserResolver {
     return this.userService.findOneById(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Query(_ => [User])
   users(@Args() args: PaginationArgs) {
     return this.userService.findAll(args);

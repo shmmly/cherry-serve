@@ -4,13 +4,16 @@ import {
   ExecutionContext,
 } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
+import { GqlExecutionContext } from '@nestjs/graphql'
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
   canActivate(context: ExecutionContext) {
     // add your custom authentication logic here
     // for example, call super.logIn(request) to establish a session.
-    console.log(context, 'jwt授权对应的context')
+    const ctx = GqlExecutionContext.create(context)
+
+
 
     return super.canActivate(context)
   }
